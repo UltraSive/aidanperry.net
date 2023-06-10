@@ -28,12 +28,15 @@
 				<li><a>Skills</a></li>
 			</ul>
 		</div>
-		<a class="btn btn-ghost normal-case text-xl">AidanPerry.net</a>
+		<a href="#" class="btn btn-ghost normal-case text-xl">AidanPerry.net</a>
 	</div>
 	<div class="navbar-end hidden lg:flex">
 		<ul class="menu menu-horizontal px-1">
-			<li><a>Portfolio</a></li>
-			<li><a>Skills</a></li>
+			<li><a href="#portfolio">Projects</a></li>
+			<li><a href="#skills">Skills</a></li>
+			<li><a href="#experience">Experience</a></li>
+			<li><a href="#blog">Blog</a></li>
+			<li><a href="#contact">Contact</a></li>
 		</ul>
 	</div>
 </div>
