@@ -42,7 +42,7 @@
 	<meta name="twitter:data2" content={formatDate(post.attributes.createdAt)} />
 </svelte:head>
 <div class="flex justify-center">
-	<article class="prose lg:prose-xl">
+	<article class="px-2 prose lg:prose-xl">
 		<h1>{post.attributes.title}</h1>
 		<div class="flex justify-center">
 			<img

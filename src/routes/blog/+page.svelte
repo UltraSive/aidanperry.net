@@ -13,7 +13,7 @@
 
 <div class="flex justify-center">
 	<div class="max-w-8xl">
-		<div class="grid grid-cols-1 px-4 sm:grid-cols-2 gap-4">
+		<div class="grid grid-cols-1 px-2 sm:grid-cols-2 gap-4">
 			{#each posts as post}
 				<a href="/blog/{post.attributes.slug}" class="block no-underline">
 					<div
