@@ -43,45 +43,43 @@
 </script>
 
 <div class="container mx-auto p-2">
-	<div class="bg-white p-4 rounded-lg shadow-md">
-		{#each projects as project}
-			<!-- Accordion Item -->
-			<div class="mb-4">
-				<button
-					class="w-full text-left block bg-gray-100 hover:bg-gray-200 p-2 cursor-pointer rounded-md"
-					on:click={() => (open = project.name)}
-				>
-					{#if open == project.name}
-						<Plus class="h-4 inline" />
-					{:else}
-						<Minus class="h-4 inline" />
-					{/if}
-					{project.name}
-				</button>
+	{#each projects as project}
+		<!-- Accordion Item -->
+		<div class="mb-4">
+			<button
+				class="w-full text-left block bg-gray-100 hover:bg-gray-200 p-2 cursor-pointer rounded-md"
+				on:click={() => (open = project.name)}
+			>
 				{#if open == project.name}
-					<div class="p-4" transition:slide={{ duration: 1000, easing: elasticInOut }}>
-						{project.description}
-						<div class="flex justify-between">
-							<ul class="text-sm text-gray-600">
-								{#each project.technologies as tech}
-									<li
-										class="inline-block relative pr-8 last:pr-0 last-of-type:before:hidden before:absolute before:top-1/2 before:right-3 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600"
-									>
-										{tech}
-									</li>
-								{/each}
-							</ul>
-							<a href="{project.githubLink}" class="cursor-pointer">
-								<span
-									class="inline-flex justify-center items-center w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white dark:bg-white dark:text-gray-800"
-								>
-									<Github class="h-6" />
-								</span>
-							</a>
-						</div>
-					</div>
+					<Plus class="h-4 inline" />
+				{:else}
+					<Minus class="h-4 inline" />
 				{/if}
-			</div>
-		{/each}
-	</div>
+				{project.name}
+			</button>
+			{#if open == project.name}
+				<div class="p-4" transition:slide={{ duration: 1000, easing: elasticInOut }}>
+					{project.description}
+					<div class="flex justify-between">
+						<ul class="text-sm text-gray-600">
+							{#each project.technologies as tech}
+								<li
+									class="inline-block relative pr-8 last:pr-0 last-of-type:before:hidden before:absolute before:top-1/2 before:right-3 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600"
+								>
+									{tech}
+								</li>
+							{/each}
+						</ul>
+						<a href={project.githubLink} class="cursor-pointer">
+							<span
+								class="inline-flex justify-center items-center w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white dark:bg-white dark:text-gray-800"
+							>
+								<Github class="h-6" />
+							</span>
+						</a>
+					</div>
+				</div>
+			{/if}
+		</div>
+	{/each}
 </div>
