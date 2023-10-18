@@ -3,6 +3,7 @@
 	export let data;
 
 	import { marked } from 'marked';
+	import hljs from 'highlight.js';
 
 	const post = data.post[0];
 
