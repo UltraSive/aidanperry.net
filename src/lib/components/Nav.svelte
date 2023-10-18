@@ -1,5 +1,10 @@
 <script>
-    import logo from '$lib/images/favicon.png'
+	import logo from '$lib/images/favicon.png';
+
+	import { fly } from 'svelte/transition';
+	import { expoInOut } from 'svelte/easing';
+
+	$: mobileMenu = false;
 </script>
 
 <header
@@ -11,15 +16,21 @@
 	>
 		<div class="flex items-center justify-between">
 			<a class="flex-none" href="/">
-                <img src={logo} alt="Aidan Perry Logo" class="w-auto h-10" />
+				<img
+					src={logo}
+					alt="Aidan Perry Logo"
+					class="w-auto h-10"
+					on:click={() => (mobileMenu = false)}
+				/>
 			</a>
 			<div class="sm:hidden">
 				<button
 					type="button"
 					class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-					data-hs-collapse="#navbar-image-1"
-					aria-controls="navbar-image-1"
+					data-hs-collapse="#navbar-links"
+					aria-controls="navbar-links"
 					aria-label="Toggle navigation"
+					on:click={() => (mobileMenu = !mobileMenu)}
 				>
 					<svg
 						class="hs-collapse-open:hidden w-4 h-4"
@@ -48,11 +59,15 @@
 			</div>
 		</div>
 		<div
-			id="navbar-image-1"
-			class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
+			id="navbar-links"
+			class="hs-collapse {mobileMenu
+				? ''
+				: 'hidden'} overflow-hidden transition-all duration-300 basis-full grow sm:block"
+			transition:fly={{ duration: 1000, easing: expoInOut, y: 10, x: 10 }}
 		>
 			<div
 				class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5"
+				on:click={() => (mobileMenu = false)}
 			>
 				<a
 					class="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
