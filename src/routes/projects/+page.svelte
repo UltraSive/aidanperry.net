@@ -1,5 +1,5 @@
 <script>
-	import { Plus, Minus } from 'lucide-svelte';
+	import { Plus, Minus, Github } from 'lucide-svelte';
 
 	import { slide } from 'svelte/transition';
 	import { elasticInOut } from 'svelte/easing';
@@ -61,15 +61,24 @@
 				{#if open == project.name}
 					<div class="p-4" transition:slide={{ duration: 1000, easing: elasticInOut }}>
 						{project.description}
-						<ul class="text-sm text-gray-600">
-							{#each project.technologies as tech}
-								<li
-									class="inline-block relative pr-8 last:pr-0 last-of-type:before:hidden before:absolute before:top-1/2 before:right-3 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600"
+						<div class="flex justify-between">
+							<ul class="text-sm text-gray-600">
+								{#each project.technologies as tech}
+									<li
+										class="inline-block relative pr-8 last:pr-0 last-of-type:before:hidden before:absolute before:top-1/2 before:right-3 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600"
+									>
+										{tech}
+									</li>
+								{/each}
+							</ul>
+							<a href="{project.githubLink}" class="cursor-pointer">
+								<span
+									class="inline-flex justify-center items-center w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-700 text-white dark:bg-white dark:text-gray-800"
 								>
-									{tech}
-								</li>
-							{/each}
-						</ul>
+									<Github class="h-6" />
+								</span>
+							</a>
+						</div>
 					</div>
 				{/if}
 			</div>
