@@ -34,7 +34,7 @@
 						<p class="mt-1 text-gray-800 dark:text-gray-400">
 							{post.attributes.description}
 						</p>
-						<div class="mt-2">
+						<div class="mt-">
 							<p class="text-xs text-gray-500 dark:text-gray-500">
 								{formatDate(post.attributes.createdAt)}
 							</p>
