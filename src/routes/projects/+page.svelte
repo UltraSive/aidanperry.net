@@ -42,6 +42,10 @@
 	$: open = 'XDP Firewall';
 </script>
 
+<svelte:head>
+	<title>Aidan Perry's Projects</title>
+</svelte:head>
+
 <div class="container mx-auto p-2">
 	{#each projects as project}
 		<!-- Accordion Item -->

@@ -11,21 +11,27 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Aidan Perry's Blog</title>
+</svelte:head>
+
 <div class="flex justify-center">
 	<div class="px-4">
 		{#each posts as post}
-			<a href="/blog/{post.attributes.slug}" class="block no-underline ">
+			<a href="/blog/{post.attributes.slug}" class="block no-underline">
 				<div
 					class="max-w-4xl my-4 hover:bg-gray-50 bg-white border rounded-xl shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
 				>
 					<div
 						class="flex-shrink-0 relative w-full rounded-t-xl overflow-hidden pt-[40%] sm:rounded-l-xl sm:max-w-[15rem] md:rounded-tr-none md:max-w-xs"
 					>
-						<img
-							class="w-full h-full absolute top-0 left-0 object-cove"
-							src="https://cms.anchored.host{post.attributes.image.data.attributes.url}"
-							alt="Image Description"
-						/>
+						{#if post.attributes.image.data != null}
+							<img
+								class="w-full h-full absolute top-0 left-0 object-cove"
+								src="https://cms.anchored.host{post.attributes.image.data.attributes.url}"
+								alt="Article Preview Image"
+							/>
+						{/if}
 					</div>
 					<div class="p-4 flex flex-col h-full sm:p-7">
 						<h3 class="text-lg font-bold text-gray-800 dark:text-white">
