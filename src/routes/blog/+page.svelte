@@ -1,53 +1,35 @@
 <script lang="ts">
-	/** @type {import('./$types').PageData} */
-	export let data;
+	import RssIcon from '@lucide/svelte/icons/rss';
+	import { resolve } from '$app/paths';
+	import { profile } from '#lib/data/profile.js';
+	import PostList from '#lib/components/site/post-list.svelte';
+	import type { PageProps } from './$types';
 
-	let posts = data.posts;
-
-	function formatDate(dateString) {
-		const date = new Date(dateString);
-		const options = { month: 'long', day: 'numeric', year: 'numeric' };
-		return date.toLocaleDateString('en-US', options);
-	}
+	let { data }: PageProps = $props();
 </script>
 
 <svelte:head>
-	<title>Aidan Perry's Blog</title>
+	<title>Blog · {profile.name}</title>
+	<meta
+		name="description"
+		content="Notes on networking, infrastructure and software by {profile.name}."
+	/>
 </svelte:head>
 
-<div class="flex justify-center">
-	<div class="px-4">
-		{#each posts as post}
-			<a href="/blog/{post.attributes.slug}" class="block no-underline">
-				<div
-					class="max-w-4xl my-4 hover:bg-gray-50 bg-white border rounded-xl shadow-sm sm:flex dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]"
-				>
-					<div
-						class="flex-shrink-0 relative w-full rounded-t-xl overflow-hidden pt-[40%] sm:rounded-l-xl sm:max-w-[15rem] md:rounded-tr-none md:max-w-xs"
-					>
-						{#if post.attributes.image.data != null}
-							<img
-								class="w-full h-full absolute top-0 left-0 object-cove"
-								src="https://cms.anchored.host{post.attributes.image.data.attributes.url}"
-								alt="Article Preview Image"
-							/>
-						{/if}
-					</div>
-					<div class="p-4 flex flex-col h-full sm:p-7">
-						<h3 class="text-lg font-bold text-gray-800 dark:text-white">
-							{post.attributes.title}
-						</h3>
-						<p class="mt-1 text-gray-800 dark:text-gray-400">
-							{post.attributes.description}
-						</p>
-						<div class="mt-">
-							<p class="text-xs text-gray-500 dark:text-gray-500">
-								{formatDate(post.attributes.createdAt)}
-							</p>
-						</div>
-					</div>
-				</div>
-			</a>
-		{/each}
+<header class="flex items-start justify-between gap-4">
+	<div class="space-y-2">
+		<h1 class="text-3xl font-semibold tracking-tight">Blog</h1>
+		<p class="text-muted-foreground">Notes on networking, infrastructure and software.</p>
 	</div>
+	<a
+		href={resolve('/blog/rss.xml')}
+		class="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+		data-sveltekit-reload
+	>
+		<RssIcon class="size-4" /> RSS
+	</a>
+</header>
+
+<div class="mt-6">
+	<PostList posts={data.posts} />
 </div>

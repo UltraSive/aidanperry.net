@@ -1,38 +1,55 @@
-# create-svelte
+# aidanperry.net
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Personal site and blog for Aidan Perry, built with SvelteKit 3, Svelte 5, shadcn-svelte and Tailwind CSS 4.
 
-## Creating a project
+## Development
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+```sh
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+`npm run check` type-checks, `npm run lint` runs Prettier and ESLint.
 
-To create a production version of your app:
+## Content
 
-```bash
-npm run build
+| What                       | Where                      |
+| -------------------------- | -------------------------- |
+| Bio, experience and skills | `src/lib/data/profile.ts`  |
+| Projects                   | `src/lib/data/projects.ts` |
+| Blog posts                 | `content/blog/<slug>.md`   |
+
+### Writing a post
+
+Add a markdown file to `content/blog/`. The file name is the URL slug.
+
+```md
+---
+title: My post
+description: One-line summary for the post list, RSS and social cards.
+date: 2026-10-06
+tags: [eBPF, Go]
+draft: true # optional; drafts show in `npm run dev` only
+---
+
+Post body in GitHub-flavored markdown.
 ```
 
-You can preview the production build with `npm run preview`.
+Posts are rendered at build time (remark/rehype, Shiki for code) and styled with
+[shadcn/typeset](https://ui.shadcn.com/docs/typeset). The typeset stylesheet lives in
+`src/routes/typeset.css` and the blog preset (`.typeset-blog`) is in `src/routes/layout.css`.
+An RSS feed is generated at `/blog/rss.xml`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Deploying
+
+Every page is prerendered and served by `@sveltejs/adapter-node`.
+
+```sh
+docker build -t aidanperry.net .
+docker run -d -p 3000:3000 --restart unless-stopped aidanperry.net
+```
+
+The container listens on port 3000 (override with `-e PORT=...`) and runs as the unprivileged `node` user.
+
+> `scripts/fix-html-mime.js` runs after `vite build` to work around a SvelteKit 3.0.1 bug where
+> prerendered HTML is served without a `Content-Type` header. Delete it once that is fixed upstream.
