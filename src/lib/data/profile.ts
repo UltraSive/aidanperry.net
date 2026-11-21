@@ -5,7 +5,7 @@ export const profile = {
 	location: 'Dallas, TX',
 	url: 'https://aidanperry.net',
 	summary:
-		'I build the layers underneath the cloud: VM and container orchestration, eBPF and VPP data planes, distributed configuration and DNS, and the full-stack web apps that sit on top of it all.',
+		'I build infrastructure software: hypervisor control planes, network data planes, Kubernetes operators, and the dashboards and APIs people use to manage them.',
 	links: {
 		github: 'https://github.com/UltraSive',
 		linkedin: 'https://www.linkedin.com/in/ultrasive/',
